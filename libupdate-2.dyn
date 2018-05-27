@@ -1,0 +1,559 @@
+{
+  "Uuid": "08f5b0a9-e685-4431-98c4-4e1d7b049331",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "libupdate-2",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "27d3ad483d3346cebc3100f689262381",
+      "Name": "Directory Path",
+      "Type": "string",
+      "Value": "C:\\7777",
+      "Description": "Allows you to select a directory on the system to get its path"
+    },
+    {
+      "Id": "184c1ab3fffc47f5a50420f8ed0b4feb",
+      "Name": "Include sub-directories ?",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "Id": "4b5f7f4f8ec8422fb0aab594c9546760",
+      "Name": "Save Rfa file ?",
+      "Type": "boolean",
+      "Value": "true",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
+      "HintPath": "C:\\7777\\L17-18",
+      "InputValue": "C:\\7777",
+      "NodeType": "ExtensionNode",
+      "Id": "27d3ad483d3346cebc3100f689262381",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "a6fa1ba6edaa4f37bdc8bf7157496533",
+          "Name": "",
+          "Description": "Directory",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a directory on the system to get its path"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.IO.FileSystem.GetDirectoryContents@var,string,bool",
+      "Id": "c910688201de4346b08c78558a708945",
+      "Inputs": [
+        {
+          "Id": "4c22c2d98d1043558f1227234ace21be",
+          "Name": "directory",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4630c32aa8954e55b3bec9aaacb49067",
+          "Name": "searchString",
+          "Description": "string\nDefault value : \"*.*\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8af8e156d2b1488eaf5ad11b67db771b",
+          "Name": "includeSubdirectories",
+          "Description": "bool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f02a12bd1f2c489bab92087384f4acb2",
+          "Name": "files",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "61b10d33392c4cc8b28fffde2431e23f",
+          "Name": "directories",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "FileSystem.GetDirectoryContents (directory: var, searchString: string = \"*.*\", includeSubdirectories: bool = false): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "184c1ab3fffc47f5a50420f8ed0b4feb",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7c0328889ee94219ae473fd25c656eab",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "*.rfa",
+      "Id": "c1ca7724a25a44d393d6f184e3afec48",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ab6f5e408c9a4093a987e945a695cf83",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DirectoryObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "ffe203737c2d4c55817f6c1cd4fd13ad",
+      "Inputs": [
+        {
+          "Id": "e795b7eeedc64bb5864542a4a233c7e2",
+          "Name": "path",
+          "Description": "Path to the directory.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fa929f6b462d4505a026236af51c113d",
+          "Name": "directory",
+          "Description": "Directory object.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a directory object from a path"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "b31dd9ee85b74353aec1c45dd6ee3f9a",
+      "Inputs": [
+        {
+          "Id": "6b9c874cc1ef4a15bf4b187700e2deda",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8e4c53ec893c495bb13d94ec87e27e89",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Application.Application.OpenDocumentFile@string,bool,bool",
+      "Id": "03f921a983764d34bb016b41fe282dba",
+      "Inputs": [
+        {
+          "Id": "cb9cc4c979054301821cd6ec06ea3202",
+          "Name": "filePath",
+          "Description": "The file to obtain document from.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e1d0b430589c44a5a44c7aa2798369f8",
+          "Name": "audit",
+          "Description": "Choose whether or not to audit the file upon opening. (Will run slower with this)\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c626fe9175e54d13b5d0bf19aef5c94b",
+          "Name": "detachFromCentral",
+          "Description": "Choose whether or not to detach from central upon opening. Only for RVT files.\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a41f623c81544b25860115091c61b09c",
+          "Name": "Document",
+          "Description": "The document.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will open the given file in the background.\n\nApplication.OpenDocumentFile (filePath: string, audit: bool = false, detachFromCentral: bool = false): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Application.Application.CloseDocument@var,bool",
+      "Id": "da73b0df5f7f473692d96198ad572424",
+      "Inputs": [
+        {
+          "Id": "79e61cd1e7c84cbd89abbbdc67d5f82f",
+          "Name": "document",
+          "Description": "The document to close.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f22f11e520e84371ab775cf53be33a54",
+          "Name": "save",
+          "Description": "Do you want to save?\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bd5e586d0f9445819a759c64ae4c636c",
+          "Name": "result",
+          "Description": "Did it work?",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will close the given document with the option to save.\n\nApplication.CloseDocument (document: var, save: bool): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "af6de4edc4784ebb976b9e19e31992a7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "6ea9f5c98a5745948a9cc5abe6aeb421",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "4b5f7f4f8ec8422fb0aab594c9546760",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9fb0ed5bccd740659868aa6a9781dda7",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "a6fa1ba6edaa4f37bdc8bf7157496533",
+      "End": "e795b7eeedc64bb5864542a4a233c7e2",
+      "Id": "2d73adb5da1b4d67a43a794c43c86f12"
+    },
+    {
+      "Start": "f02a12bd1f2c489bab92087384f4acb2",
+      "End": "cb9cc4c979054301821cd6ec06ea3202",
+      "Id": "78d65f9518c1482aa47dd9d10bf2dc9d"
+    },
+    {
+      "Start": "7c0328889ee94219ae473fd25c656eab",
+      "End": "8af8e156d2b1488eaf5ad11b67db771b",
+      "Id": "439cf3bb22c3496691f60bb1f6cd4e4b"
+    },
+    {
+      "Start": "ab6f5e408c9a4093a987e945a695cf83",
+      "End": "4630c32aa8954e55b3bec9aaacb49067",
+      "Id": "bdb815f8e74c42d1a27be13c524b8299"
+    },
+    {
+      "Start": "fa929f6b462d4505a026236af51c113d",
+      "End": "4c22c2d98d1043558f1227234ace21be",
+      "Id": "b82a8c7c914741669847ca018bda8124"
+    },
+    {
+      "Start": "a41f623c81544b25860115091c61b09c",
+      "End": "79e61cd1e7c84cbd89abbbdc67d5f82f",
+      "Id": "464eef02d0804f4e8bc3b3edeeed5413"
+    },
+    {
+      "Start": "bd5e586d0f9445819a759c64ae4c636c",
+      "End": "6b9c874cc1ef4a15bf4b187700e2deda",
+      "Id": "ab89830312e4437a819f83715d341bf2"
+    },
+    {
+      "Start": "6ea9f5c98a5745948a9cc5abe6aeb421",
+      "End": "e1d0b430589c44a5a44c7aa2798369f8",
+      "Id": "8180390eb1cc4152935ea9c9a57aa43e"
+    },
+    {
+      "Start": "6ea9f5c98a5745948a9cc5abe6aeb421",
+      "End": "c626fe9175e54d13b5d0bf19aef5c94b",
+      "Id": "79ecba9602f941b79199014302eb2198"
+    },
+    {
+      "Start": "9fb0ed5bccd740659868aa6a9781dda7",
+      "End": "f22f11e520e84371ab775cf53be33a54",
+      "Id": "4187db4067384dfba27f1d61841f87d1"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.0.4654",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Directory Path",
+        "Id": "27d3ad483d3346cebc3100f689262381",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 91.5410954150475,
+        "Y": 39.879534279968254
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "FileSystem.GetDirectoryContents",
+        "Id": "c910688201de4346b08c78558a708945",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 555.54109541504749,
+        "Y": 113.87953427996825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Include sub-directories ?",
+        "Id": "184c1ab3fffc47f5a50420f8ed0b4feb",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 292.54109541504749,
+        "Y": 231.87953427996825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "c1ca7724a25a44d393d6f184e3afec48",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 292.54109541504749,
+        "Y": 147.87953427996825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Directory From Path",
+        "Id": "ffe203737c2d4c55817f6c1cd4fd13ad",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 292.54109541504749,
+        "Y": 39.879534279968254
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "b31dd9ee85b74353aec1c45dd6ee3f9a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1686.5410954150475,
+        "Y": 241.87953427996825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Application.OpenDocumentFile",
+        "Id": "03f921a983764d34bb016b41fe282dba",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 971.54109541504749,
+        "Y": 174.87953427996825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Application.CloseDocument",
+        "Id": "da73b0df5f7f473692d96198ad572424",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1370.5410954150475,
+        "Y": 241.87953427996825
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "af6de4edc4784ebb976b9e19e31992a7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 565.93623147654671,
+        "Y": 315.51506615673742
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Save Rfa file ?",
+        "Id": "4b5f7f4f8ec8422fb0aab594c9546760",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1136.3727689732721,
+        "Y": 402.157768385366
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "49d144a980354f08a070bcdea680ee60",
+        "Title": "Open and optionally save rfa files.\r\nUsing Rhythm package",
+        "Nodes": [
+          "03f921a983764d34bb016b41fe282dba",
+          "da73b0df5f7f473692d96198ad572424",
+          "4b5f7f4f8ec8422fb0aab594c9546760"
+        ],
+        "Left": 961.54109541504749,
+        "Top": 78.879534279968254,
+        "Width": 635.0,
+        "Height": 391.27823410539776,
+        "FontSize": 36.0,
+        "InitialTop": 174.87953427996825,
+        "InitialHeight": 325.27823410539781,
+        "TextblockHeight": 86.0,
+        "Background": "#FFBB87C6"
+      },
+      {
+        "Id": "ba8916521b0e44c6b9295782c934d233",
+        "Title": "Get a list of rfa files",
+        "Nodes": [
+          "27d3ad483d3346cebc3100f689262381",
+          "c910688201de4346b08c78558a708945",
+          "184c1ab3fffc47f5a50420f8ed0b4feb",
+          "c1ca7724a25a44d393d6f184e3afec48",
+          "ffe203737c2d4c55817f6c1cd4fd13ad"
+        ],
+        "Left": 81.5410954150475,
+        "Top": -13.120465720031746,
+        "Width": 800.0,
+        "Height": 313.0,
+        "FontSize": 36.0,
+        "InitialTop": 39.879534279968254,
+        "InitialHeight": 290.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -652.65924542868538,
+    "Y": -55.095760049758439,
+    "Zoom": 1.1154442832341003
+  }
+}

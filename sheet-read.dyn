@@ -1,0 +1,298 @@
+{
+  "Uuid": "955d4e95-abf1-454e-babc-7b3640d6bd35",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "sheet-read",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "7289b04caa38467aac4b5d90e2d60195",
+      "Inputs": [
+        {
+          "Id": "178e115f82a2466986d8fca09c26bea3",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9456fb81c53d438b8a5af5fd2d35a522",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 422,
+      "NodeType": "ExtensionNode",
+      "Id": "507dad3ff83048eeb5bb1cf5baac7305",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cdbc3c9e259f49b9bba6e7ac14baba82",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "87be6819567f4a708d4b35b6a3db4ba1",
+      "Inputs": [
+        {
+          "Id": "0dd46eb3be7d45fea2871fb3c2f2a9ab",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bab32d68b33a4c1aa5f3162b2640b10d",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "7f50519e1bc6415396dbe7e03ef81428",
+      "Inputs": [
+        {
+          "Id": "27a53992663149f3982bf820fbfac350",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bb97505828a943e0b8f1aa83017ac3c0",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "382c2eab133e43fe8f348648b791f9b9",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Title block",
+      "Id": "fdcc0a95535d47f8b2b19ff3f0df911a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "53ba5e367ba84ad1ad650245434535a7",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\n#OUT = dir(IN[0][0])\r\n# Place your code below this line\r\nOUT = (IN[0][0]).GetType()\r\n#OUT = (IN[0][1]).UniqueId\r\n\r\n#OUT = Parameters(IN[0][0])",
+      "VariableInputPorts": true,
+      "Id": "394bcf02ac53438d8ea736ecabb8cbbc",
+      "Inputs": [
+        {
+          "Id": "2a3317628b264f2f99baf3aa9cda5c27",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9aea7fea2ae442a09a845c75385418e6",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "9456fb81c53d438b8a5af5fd2d35a522",
+      "End": "27a53992663149f3982bf820fbfac350",
+      "Id": "0e4f330ea1d04c80b78f444a31e21287"
+    },
+    {
+      "Start": "9456fb81c53d438b8a5af5fd2d35a522",
+      "End": "2a3317628b264f2f99baf3aa9cda5c27",
+      "Id": "11b0c95981734ded929132f6d277217c"
+    },
+    {
+      "Start": "cdbc3c9e259f49b9bba6e7ac14baba82",
+      "End": "178e115f82a2466986d8fca09c26bea3",
+      "Id": "7dcceb36f15f4561ad3cabb001bb0d7b"
+    },
+    {
+      "Start": "53ba5e367ba84ad1ad650245434535a7",
+      "End": "bb97505828a943e0b8f1aa83017ac3c0",
+      "Id": "0b2dbcdd256148bd92e3abc2c54345f6"
+    },
+    {
+      "Start": "9aea7fea2ae442a09a845c75385418e6",
+      "End": "0dd46eb3be7d45fea2871fb3c2f2a9ab",
+      "Id": "18a68d050a004568bb5b90fe82afcd00"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "7289b04caa38467aac4b5d90e2d60195",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 273.5,
+        "Y": 153.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "507dad3ff83048eeb5bb1cf5baac7305",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 37.5,
+        "Y": 155.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "87be6819567f4a708d4b35b6a3db4ba1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 727.0,
+        "Y": 193.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "7f50519e1bc6415396dbe7e03ef81428",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 489.0,
+        "Y": 30.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "fdcc0a95535d47f8b2b19ff3f0df911a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 343.0,
+        "Y": 42.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "394bcf02ac53438d8ea736ecabb8cbbc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 545.0,
+        "Y": 188.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}
