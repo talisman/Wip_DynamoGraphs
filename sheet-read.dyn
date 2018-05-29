@@ -149,7 +149,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\n#OUT = dir(IN[0][0])\r\n# Place your code below this line\r\nOUT = (IN[0][0]).GetType()\r\n#OUT = (IN[0][1]).UniqueId\r\n\r\n#OUT = Parameters(IN[0][0])",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\n#OUT = dir(IN[0][0])\r\n# Place your code below this line\r\n#OUT = (IN[0][0]).GetType()\r\n#OUT = dir(IN[0][0])\r\n#OUT = (IN[0][1]).UniqueId\r\n#OUT = (IN[0][1]).ElementType\r\n#OUT = (IN[0][1]).Parameters\r\n\r\nOUT = (IN[0][1]).Views\r\n\r\n#OUT = Parameters(IN[0][0])",
       "VariableInputPorts": true,
       "Id": "394bcf02ac53438d8ea736ecabb8cbbc",
       "Inputs": [
@@ -176,6 +176,35 @@
       ],
       "Replication": "Disabled",
       "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "7eeb7922ee834cb0b6ce199395ed9879",
+      "Inputs": [
+        {
+          "Id": "6d67530dc8a846c3b29052b65fdda23b",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ee126c27a2f64866b077216c2a57f4cc",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
     }
   ],
   "Connectors": [
@@ -193,6 +222,11 @@
       "Start": "cdbc3c9e259f49b9bba6e7ac14baba82",
       "End": "178e115f82a2466986d8fca09c26bea3",
       "Id": "7dcceb36f15f4561ad3cabb001bb0d7b"
+    },
+    {
+      "Start": "382c2eab133e43fe8f348648b791f9b9",
+      "End": "6d67530dc8a846c3b29052b65fdda23b",
+      "Id": "80d2a5f4a9c047228b23bc0d2a741bf1"
     },
     {
       "Start": "53ba5e367ba84ad1ad650245434535a7",
@@ -236,8 +270,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 273.5,
-        "Y": 153.0
+        "X": 184.5,
+        "Y": 45.0
       },
       {
         "ShowGeometry": true,
@@ -246,8 +280,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 37.5,
-        "Y": 155.0
+        "X": 3.5,
+        "Y": 45.0
       },
       {
         "ShowGeometry": true,
@@ -256,8 +290,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 727.0,
-        "Y": 193.0
+        "X": 599.82046425136264,
+        "Y": 253.21392831375312
       },
       {
         "ShowGeometry": true,
@@ -266,8 +300,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 489.0,
-        "Y": 30.0
+        "X": 642.0,
+        "Y": 42.0
       },
       {
         "ShowGeometry": true,
@@ -276,8 +310,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 343.0,
-        "Y": 42.0
+        "X": 458.0,
+        "Y": 148.0
       },
       {
         "ShowGeometry": true,
@@ -286,13 +320,23 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 545.0,
-        "Y": 188.0
+        "X": 445.08334458531237,
+        "Y": 261.17011492476149
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "7eeb7922ee834cb0b6ce199395ed9879",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 882.0,
+        "Y": 17.0
       }
     ],
     "Annotations": [],
-    "X": 0.0,
-    "Y": 0.0,
-    "Zoom": 1.0
+    "X": 250.36352895921266,
+    "Y": 90.781477010849812,
+    "Zoom": 0.642869557405948
   }
 }
