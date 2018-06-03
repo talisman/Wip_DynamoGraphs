@@ -1,0 +1,219 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "sheets-selection-with-python",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nimport Autodesk\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\n\r\n########\r\ndef collect_params(param_element):\r\n    \"\"\"\r\n    Collects parameters of the provided element.\r\n    Args:\r\n        param_element: Element that holds the parameters.\r\n    Returns:\r\n        Returns a dictionary, with parameters.\r\n    \"\"\"\r\n\r\n    parameters = param_element.Parameters\r\n    param_dict = defaultdict(list)\r\n\r\n    for param in parameters:\r\n        param_dict[param.Definition.Name].append(param.StorageType.ToString().split(\".\")[-1])\r\n        param_dict[param.Definition.Name].append(param.HasValue)\r\n\r\n        param_value = None\r\n        if param.HasValue:\r\n            if param.StorageType.ToString() == \"ElementId\":\r\n                param_value = param.AsElementId().IntegerValue\r\n            elif param.StorageType.ToString() == \"Integer\":\r\n                param_value = param.AsInteger()\r\n            elif param.StorageType.ToString() == \"Double\":\r\n                param_value = param.AsDouble()\r\n            elif param.StorageType.ToString() == \"String\":\r\n                param_value = param.AsString()\r\n        param_dict[param.Definition.Name].append(str(param_value))\r\n\r\n    return param_dict\r\n#########\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\ncollector = FilteredElementCollector(doc)\r\nsheets = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Sheets).ToElements()\r\n#sheets = collector.OfClass(BuiltInCategory.OST_Sheets).ToElements()\r\nsheetlist = []\r\n\r\n\r\n\r\n\r\nfor sht in sheets:\r\n\tsheetlist.append(sht)\r\n\r\nsht2 = sheets[1]\r\n\r\nsht2p = collect_params(sht2)\r\n\r\n\r\nOUT = sht2.ViewName,sht2.SheetNumber,sht2p",
+      "VariableInputPorts": true,
+      "Id": "125184b0a7174896ada70a3993d6d445",
+      "Inputs": [
+        {
+          "Id": "1d3c6743bbc548c690e027ed01c003ff",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5cf6142ffbbe423a9906cbec159c996a",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "1fcb4108cd9c45de934b8979e796b151",
+      "Inputs": [
+        {
+          "Id": "91934375d70540858f40a53606ee4dd5",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e9ea0e14330e4735b5c6b0ce3bc6522a",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.Object.Type@var",
+      "Id": "a50e7528bb044597a3f2c7f828ebe03a",
+      "Inputs": [
+        {
+          "Id": "f5c221ce5f5643b2bd246aebed4ebd3c",
+          "Name": "obj",
+          "Description": "An object.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ad4a78b46de4403e9081e3ea669a29ff",
+          "Name": "string",
+          "Description": "Type of object.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the type of object represented as string.\n\nObject.Type (obj: var): string"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "a53b485eb44e47b0b6bc4bacc837ea5b",
+      "Inputs": [
+        {
+          "Id": "4bfe478262b5415fb8a6b788d3ca0a8a",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1bb556aaafb145588b05d7509fd73f15",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "5cf6142ffbbe423a9906cbec159c996a",
+      "End": "f5c221ce5f5643b2bd246aebed4ebd3c",
+      "Id": "fbfeb72860b1438baf58aee08e552aaa"
+    },
+    {
+      "Start": "5cf6142ffbbe423a9906cbec159c996a",
+      "End": "4bfe478262b5415fb8a6b788d3ca0a8a",
+      "Id": "bd418bcdec2f41c18796e76c0fffb2e8"
+    },
+    {
+      "Start": "ad4a78b46de4403e9081e3ea669a29ff",
+      "End": "91934375d70540858f40a53606ee4dd5",
+      "Id": "c5bdc37f78994b088207ca366c8ba144"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script collect sheets",
+        "Id": "125184b0a7174896ada70a3993d6d445",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 73.0,
+        "Y": 29.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "1fcb4108cd9c45de934b8979e796b151",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 683.0,
+        "Y": 49.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Object.Type",
+        "Id": "a50e7528bb044597a3f2c7f828ebe03a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 360.0,
+        "Y": 15.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "a53b485eb44e47b0b6bc4bacc837ea5b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 315.0,
+        "Y": 184.0
+      }
+    ],
+    "Annotations": [],
+    "X": 35.656379946256976,
+    "Y": 53.814455983482191,
+    "Zoom": 0.78436932804482706
+  }
+}
