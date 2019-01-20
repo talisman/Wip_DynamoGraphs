@@ -1,0 +1,299 @@
+{
+  "Uuid": "02b18582-7bbe-48a9-9dfe-d8bc1149c825",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "model-groups-01",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "efe3877913ef48c3a919a9631396d3c3",
+      "Inputs": [
+        {
+          "Id": "0abb64f9d0814361ae2981e6d218b44f",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ca0b0cbdbcaf4a8dae384b59a25ae2a9",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 326,
+      "NodeType": "ExtensionNode",
+      "Id": "895629290e8548a5a89b0adc50146342",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ca31377e811c49e695038613f947cc2a",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "26a13c45940840d8b3aaeca13e800824",
+      "Inputs": [
+        {
+          "Id": "b4f4f687f1c34076875a01909a9dc083",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fb063af479824a8596e723ec72a93507",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitNodes')\r\nfrom Autodesk.DesignScript.Geometry import *\r\nimport Revit\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nmodelGroups = IN[0]\r\n\r\n# Place your code below this line\r\n\r\ndef get_group_names(allgroups):\r\n\tgroup_names = []\r\n\tfor x in allgroups:\r\n\t\tif x.Name not in group_names:\r\n\t\t\tgroup_names.append(x.Name)\r\n\treturn group_names\r\n\r\ndef get_count_instances(group_name , allgroups):\r\n\ttotal = 0;\r\n\tfor x in allgroups:\r\n\t\tif x.Name == group_name:\r\n\t\t\ttotal +=1\r\n\treturn total\r\n\r\n\r\nmodel_groups_names  = get_group_names(modelGroups)\r\noutput = []\r\n\r\nfor x in model_groups_names:\r\n\ti = get_count_instances(x, modelGroups)\r\n\toutput.append([x,i,])\r\n\t\t\r\nmg = modelGroups[3]\r\nbb = mg.BoundingBox\r\n\r\nOUT =  dir(mg),output",
+      "VariableInputPorts": true,
+      "Id": "7ed7b2ed3086424c8726a6bd32ad6685",
+      "Inputs": [
+        {
+          "Id": "8c8bcea8f39a40ac9726bd578a27999c",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2474fd9a10504156a1c35f0a76cb27db",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "a0310253c3cb4944b924a32db251ef97",
+      "Inputs": [
+        {
+          "Id": "cefa4e9322b5477e8ae86d164da01585",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1642d48f05214770bbeac11e8c2cbb3c",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\n\r\n\r\n# Place your code below this line\r\n\r\n# Assign your output to the OUT variable.\r\n\r\n\r\n\r\n\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nmodelGroups = IN[0]\r\n\r\n\r\n\r\ndef get_group_names(allgroups):\r\n\tgroup_names = []\r\n\tfor x in allgroups:\r\n\t\tif x.Name not in group_names:\r\n\t\t\tgroup_names.append(x.Name)\r\n\treturn group_names\r\n\r\ndef get_count_instances(group_name , allgroups):\r\n\ttotal = 0;\r\n\tfor x in allgroups:\r\n\t\tif x.Name == group_name:\r\n\t\t\ttotal +=1\r\n\treturn total\r\n\t\r\nmodel_groups_names  = get_group_names(modelGroups)\r\noutput = []\r\n\r\nfor x in model_groups_names:\r\n\ti = get_count_instances(x, modelGroups)\r\n\toutput.append([x,i,])\r\n\r\n# Place your code below this line\r\n\r\nmg = modelGroups[3]\r\n\r\nOUT =  dir(mg),output",
+      "VariableInputPorts": true,
+      "Id": "fd74644fb76f4396b8e13c5d5cab6f8d",
+      "Inputs": [
+        {
+          "Id": "a20a85c3e4bf433085328a074f7203fe",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "87a19a52a10c48cba73bd8c4555032ac",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "ca0b0cbdbcaf4a8dae384b59a25ae2a9",
+      "End": "8c8bcea8f39a40ac9726bd578a27999c",
+      "Id": "131043c9faa04bb88ea9dff136584313"
+    },
+    {
+      "Start": "ca0b0cbdbcaf4a8dae384b59a25ae2a9",
+      "End": "cefa4e9322b5477e8ae86d164da01585",
+      "Id": "77c9087c3ea947ea9d289540e127750e"
+    },
+    {
+      "Start": "ca0b0cbdbcaf4a8dae384b59a25ae2a9",
+      "End": "a20a85c3e4bf433085328a074f7203fe",
+      "Id": "1da6a5761347447d9b748dc0355a79dc"
+    },
+    {
+      "Start": "ca31377e811c49e695038613f947cc2a",
+      "End": "0abb64f9d0814361ae2981e6d218b44f",
+      "Id": "dc9044840fd64e5cb89f1e220c32734a"
+    },
+    {
+      "Start": "87a19a52a10c48cba73bd8c4555032ac",
+      "End": "b4f4f687f1c34076875a01909a9dc083",
+      "Id": "c8328884850f45b9bec15c63eee75ec8"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "efe3877913ef48c3a919a9631396d3c3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -30.981632131942945,
+        "Y": -262.92743841546212
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "895629290e8548a5a89b0adc50146342",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -323.96367212592975,
+        "Y": -226.32743432017926
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "26a13c45940840d8b3aaeca13e800824",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 899.84802855895646,
+        "Y": -348.68697804446197
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "7ed7b2ed3086424c8726a6bd32ad6685",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": true,
+        "X": 667.75662610720951,
+        "Y": -393.23207851185947
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "a0310253c3cb4944b924a32db251ef97",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 87.353494001465492,
+        "Y": -29.660262686084877
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "fd74644fb76f4396b8e13c5d5cab6f8d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 393.09280683627946,
+        "Y": -199.83216102788816
+      }
+    ],
+    "Annotations": [],
+    "X": 127.52396947594502,
+    "Y": 368.07211893908533,
+    "Zoom": 0.85238170630518106
+  }
+}
