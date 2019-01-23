@@ -1,0 +1,432 @@
+{
+  "Uuid": "53f09eaf-85e7-4409-9c0f-93a93bd52b6b",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "model-groups",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 320,
+      "NodeType": "ExtensionNode",
+      "Id": "fd3eea0518fb4a4482146ca361330ef5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7fb6ab5f03cf4db1b23bae1708647cc5",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "5a5ab2fdbd3a43b681d0643594b6ba4f",
+      "Inputs": [
+        {
+          "Id": "937f9f9c2a2847d08a52c413b8e8bc2b",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "36f63ff00283424ebe38896bef74e727",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "e598c5f60f1648d7b5663842699b517b",
+      "Inputs": [
+        {
+          "Id": "facb7a57daf648b08bab187b7983741c",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "298a01af390d41c197ac3ac1f02b3e5d",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n## The inputs to this node will be stored as a list in the IN variables.\r\n##\r\n##\r\nmodelGroups = IN[0]\r\n##\r\n## Place your code below this line\r\n##\r\n## Assign your output to the OUT variable.\r\n##\r\n\r\n\r\ng_names = []\r\nmgs_count = len(modelGroups)\r\nfor x in modelGroups:\r\n\tif (x.Name not in g_names):\r\n\t\tg_names.append(x.Name)\r\n\r\nboxes = [] \r\nfor x in modelGroups:\r\n\tboxes.append(x.BoundingBox)\r\n\t\r\n\r\n##OUT = mgs_count,g_names,len(g_names)\r\nOUT = boxes\r\n##",
+      "VariableInputPorts": true,
+      "Id": "c1e7f4f0015745deb5008f41c5cd3b21",
+      "Inputs": [
+        {
+          "Id": "1a609084b89b41fda20c38855b42e4a4",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e3effc95c40b4c8b8132f557a7ab82f2",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "abd25322eb7040a5b62f6eaad0a5f9e3",
+      "Inputs": [
+        {
+          "Id": "437400f235c146e8b61f30829f644780",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6c64fa7c46de4644849a4025910b45e1",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.BoundingBox.MaxPoint",
+      "Id": "3e9997a03a82423d9517543747cf824f",
+      "Inputs": [
+        {
+          "Id": "d3f541ff2a5842afa71b0fab2e92d32a",
+          "Name": "boundingBox",
+          "Description": "Autodesk.DesignScript.Geometry.BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ac7fb4030bd34f9abd50155023c6ccbb",
+          "Name": "Point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "The maximum point\n\nBoundingBox.MaxPoint: Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.BoundingBox.MinPoint",
+      "Id": "7dc06e0442944726865c66a737e1c7e3",
+      "Inputs": [
+        {
+          "Id": "fffdff9b867f4993b1d174bb926fb65a",
+          "Name": "boundingBox",
+          "Description": "Autodesk.DesignScript.Geometry.BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "650319695e7146e5821b56ea6e03d476",
+          "Name": "Point",
+          "Description": "Point",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "The minimum point\n\nBoundingBox.MinPoint: Point"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Autodesk.DesignScript.Geometry.BoundingBox.ToCuboid",
+      "Id": "e8103f4c21ef4e8ba341fde991798517",
+      "Inputs": [
+        {
+          "Id": "d68fd14ce9d44f26b7a20de94704a128",
+          "Name": "boundingBox",
+          "Description": "Autodesk.DesignScript.Geometry.BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a898f266cd2b4a20b3e469b40bf6baa7",
+          "Name": "Cuboid",
+          "Description": "A Cuboid representation of the BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the BoundingBox as a Solid Cuboid\n\nBoundingBox.ToCuboid ( ): Cuboid"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "1eb468858198444c82230e0fb569ff17",
+      "Inputs": [
+        {
+          "Id": "423aa5610f5d464bab8e3e210ae023c6",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "09296532d49244018634e5e0abd84f5d",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7fb6ab5f03cf4db1b23bae1708647cc5",
+      "End": "937f9f9c2a2847d08a52c413b8e8bc2b",
+      "Id": "046efddf79354c7f95ab2cdfd7823f72"
+    },
+    {
+      "Start": "36f63ff00283424ebe38896bef74e727",
+      "End": "1a609084b89b41fda20c38855b42e4a4",
+      "Id": "baa5220d00404e589806d6941ce82d66"
+    },
+    {
+      "Start": "e3effc95c40b4c8b8132f557a7ab82f2",
+      "End": "d3f541ff2a5842afa71b0fab2e92d32a",
+      "Id": "da393ba7267845e1a4902af63ee64352"
+    },
+    {
+      "Start": "e3effc95c40b4c8b8132f557a7ab82f2",
+      "End": "fffdff9b867f4993b1d174bb926fb65a",
+      "Id": "a20531b7aaf4446c9fcb1087149d6a25"
+    },
+    {
+      "Start": "e3effc95c40b4c8b8132f557a7ab82f2",
+      "End": "d68fd14ce9d44f26b7a20de94704a128",
+      "Id": "b4971fcbcd684ff9957ddaa697537031"
+    },
+    {
+      "Start": "ac7fb4030bd34f9abd50155023c6ccbb",
+      "End": "facb7a57daf648b08bab187b7983741c",
+      "Id": "0a0a9d54194c48fc8fca159c6ca93e50"
+    },
+    {
+      "Start": "650319695e7146e5821b56ea6e03d476",
+      "End": "437400f235c146e8b61f30829f644780",
+      "Id": "7226a21f16174eec81148333b37cfd2a"
+    },
+    {
+      "Start": "a898f266cd2b4a20b3e469b40bf6baa7",
+      "End": "423aa5610f5d464bab8e3e210ae023c6",
+      "Id": "6c5aa843d4be41dcb6a2bad8c4ddc870"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.2.6826",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -6848.0518227594221,
+      "EyeY": 13077.770700093031,
+      "EyeZ": 11283.66326073955,
+      "LookX": 8854.0787243911764,
+      "LookY": -21205.200089411082,
+      "LookZ": -9941.3131862020437,
+      "UpX": 0.47437703206703491,
+      "UpY": 0.70090926429985423,
+      "UpZ": -0.5326280453242378
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "fd3eea0518fb4a4482146ca361330ef5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 160.63759698211015,
+        "Y": -243.61983296689755
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "5a5ab2fdbd3a43b681d0643594b6ba4f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 417.06042522691854,
+        "Y": -246.42530823105685
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "e598c5f60f1648d7b5663842699b517b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1261.3278618718009,
+        "Y": -303.36743730921057
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "c1e7f4f0015745deb5008f41c5cd3b21",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 659.94307895063139,
+        "Y": -242.0103398563281
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "abd25322eb7040a5b62f6eaad0a5f9e3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1269.8897476757297,
+        "Y": 75.315812195191086
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "BoundingBox.MaxPoint",
+        "Id": "3e9997a03a82423d9517543747cf824f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 879.1850616187603,
+        "Y": -257.4116964284807
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "BoundingBox.MinPoint",
+        "Id": "7dc06e0442944726865c66a737e1c7e3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 882.61060472655367,
+        "Y": -159.44116354559316
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "BoundingBox.ToCuboid",
+        "Id": "e8103f4c21ef4e8ba341fde991798517",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 906.614202263806,
+        "Y": -414.37576612669454
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "1eb468858198444c82230e0fb569ff17",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1306.609461489863,
+        "Y": -439.75711063122071
+      }
+    ],
+    "Annotations": [],
+    "X": 25.659518566299596,
+    "Y": 376.976919364827,
+    "Zoom": 0.83734848349876589
+  }
+}
