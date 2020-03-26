@@ -208,93 +208,6 @@
       "Description": "Visualize the output of node."
     },
     {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Rhythm.Revit.Application.Application.OpenDocumentFile@string,bool,bool",
-      "Id": "03f921a983764d34bb016b41fe282dba",
-      "Inputs": [
-        {
-          "Id": "cb9cc4c979054301821cd6ec06ea3202",
-          "Name": "filePath",
-          "Description": "The file to obtain document from.\n\nstring",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "e1d0b430589c44a5a44c7aa2798369f8",
-          "Name": "audit",
-          "Description": "Choose whether or not to audit the file upon opening. (Will run slower with this)\n\nbool\nDefault value : false",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "c626fe9175e54d13b5d0bf19aef5c94b",
-          "Name": "detachFromCentral",
-          "Description": "Choose whether or not to detach from central upon opening. Only for RVT files.\n\nbool\nDefault value : false",
-          "UsingDefaultValue": true,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "a41f623c81544b25860115091c61b09c",
-          "Name": "Document",
-          "Description": "The document.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "This node will open the given file in the background.\n\nApplication.OpenDocumentFile (filePath: string, audit: bool = false, detachFromCentral: bool = false): var[]..[]"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Rhythm.Revit.Application.Application.CloseDocument@var,bool",
-      "Id": "da73b0df5f7f473692d96198ad572424",
-      "Inputs": [
-        {
-          "Id": "79e61cd1e7c84cbd89abbbdc67d5f82f",
-          "Name": "document",
-          "Description": "The document to close.\n\nvar",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "f22f11e520e84371ab775cf53be33a54",
-          "Name": "save",
-          "Description": "Do you want to save?\n\nbool",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "bd5e586d0f9445819a759c64ae4c636c",
-          "Name": "result",
-          "Description": "Did it work?",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "This node will close the given document with the option to save.\n\nApplication.CloseDocument (document: var, save: bool): var[]..[]"
-    },
-    {
       "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
       "NodeType": "BooleanInputNode",
       "InputValue": false,
@@ -333,6 +246,122 @@
       ],
       "Replication": "Disabled",
       "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Application.Applications.OpenDocumentFile@string,bool,bool,bool",
+      "Id": "3e3cc7d46d204a50b5defd6d48ecd567",
+      "Inputs": [
+        {
+          "Id": "d1ce5ecb63744a5f810f89dc464ef9b5",
+          "Name": "filePath",
+          "Description": "The file to obtain document from.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "685de58bc15840dba0efd1f6f0e91d4c",
+          "Name": "audit",
+          "Description": "Choose whether or not to audit the file upon opening. (Will run slower with this)\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ae8ecaa1a0184fff9f7f6004a228b1ec",
+          "Name": "detachFromCentral",
+          "Description": "Choose whether or not to detach from central upon opening. Only for RVT files.\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8f4fa573fc2240fc9836bdf6e1f0ad24",
+          "Name": "preserveWorksets",
+          "Description": "Choose whether or not to preserve worksets upon opening. Only for RVT files.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b7515041fbec479fa814ab833c8061e2",
+          "Name": "document",
+          "Description": "The document object. If the file path is blank this returns the current document.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will open the given file in the background.\n\nApplications.OpenDocumentFile (filePath: string, audit: bool = false, detachFromCentral: bool = false, preserveWorksets: bool = true): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Application.Applications.CloseDocument@var,bool",
+      "Id": "1a23a3d1dfb041078b2c8baa45ce87e8",
+      "Inputs": [
+        {
+          "Id": "78391baef8e24318a38a4e57f6f4c277",
+          "Name": "document",
+          "Description": "The background opened document object, (preferably this is the title as obtained with Applications.OpenDocumentFile from Rhythm).\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2e4bc5bafebf43d59329f14d4366c7cc",
+          "Name": "save",
+          "Description": "Do you want to save?\n\nbool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a64dc13c4e624ac385e7eacc0382286b",
+          "Name": "result",
+          "Description": "Did it work?",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will close the given document with the option to save.\n\nApplications.CloseDocument (document: var, save: bool): string"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "ecc998a88c6949f3af42ae95386c55d8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "4623cb7eb91f48889ce2dbcaf3cb17e7",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
     }
   ],
   "Connectors": [
@@ -343,8 +372,8 @@
     },
     {
       "Start": "f02a12bd1f2c489bab92087384f4acb2",
-      "End": "cb9cc4c979054301821cd6ec06ea3202",
-      "Id": "78d65f9518c1482aa47dd9d10bf2dc9d"
+      "End": "d1ce5ecb63744a5f810f89dc464ef9b5",
+      "Id": "33a8fd344771431981641c5981d90774"
     },
     {
       "Start": "7c0328889ee94219ae473fd25c656eab",
@@ -362,29 +391,34 @@
       "Id": "b82a8c7c914741669847ca018bda8124"
     },
     {
-      "Start": "a41f623c81544b25860115091c61b09c",
-      "End": "79e61cd1e7c84cbd89abbbdc67d5f82f",
-      "Id": "464eef02d0804f4e8bc3b3edeeed5413"
-    },
-    {
-      "Start": "bd5e586d0f9445819a759c64ae4c636c",
-      "End": "6b9c874cc1ef4a15bf4b187700e2deda",
-      "Id": "ab89830312e4437a819f83715d341bf2"
+      "Start": "6ea9f5c98a5745948a9cc5abe6aeb421",
+      "End": "8f4fa573fc2240fc9836bdf6e1f0ad24",
+      "Id": "37fae549b86842f2bb381e292e40a9ed"
     },
     {
       "Start": "6ea9f5c98a5745948a9cc5abe6aeb421",
-      "End": "e1d0b430589c44a5a44c7aa2798369f8",
-      "Id": "8180390eb1cc4152935ea9c9a57aa43e"
-    },
-    {
-      "Start": "6ea9f5c98a5745948a9cc5abe6aeb421",
-      "End": "c626fe9175e54d13b5d0bf19aef5c94b",
-      "Id": "79ecba9602f941b79199014302eb2198"
+      "End": "ae8ecaa1a0184fff9f7f6004a228b1ec",
+      "Id": "bcc70c9c94a34eeaac7fe03c66a4b4e2"
     },
     {
       "Start": "9fb0ed5bccd740659868aa6a9781dda7",
-      "End": "f22f11e520e84371ab775cf53be33a54",
-      "Id": "4187db4067384dfba27f1d61841f87d1"
+      "End": "2e4bc5bafebf43d59329f14d4366c7cc",
+      "Id": "dd3407ac6d3c43cca2f948b68033339c"
+    },
+    {
+      "Start": "b7515041fbec479fa814ab833c8061e2",
+      "End": "78391baef8e24318a38a4e57f6f4c277",
+      "Id": "14551e037ec54f19a290fe3ac11d7036"
+    },
+    {
+      "Start": "a64dc13c4e624ac385e7eacc0382286b",
+      "End": "6b9c874cc1ef4a15bf4b187700e2deda",
+      "Id": "0a0f345e0495458ab4cc089ebcc95457"
+    },
+    {
+      "Start": "4623cb7eb91f48889ce2dbcaf3cb17e7",
+      "End": "685de58bc15840dba0efd1f6f0e91d4c",
+      "Id": "d0378c7a8b0949d3862e1213471ecd28"
     }
   ],
   "Dependencies": [],
@@ -394,7 +428,7 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.0.4654",
+      "Version": "2.0.3.8810",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -418,8 +452,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 91.5410954150475,
-        "Y": 39.879534279968254
+        "X": 29.479269845558065,
+        "Y": 53.326263153357615
       },
       {
         "ShowGeometry": true,
@@ -428,8 +462,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 555.54109541504749,
-        "Y": 113.87953427996825
+        "X": 493.47926984555806,
+        "Y": 127.32626315335762
       },
       {
         "ShowGeometry": true,
@@ -438,8 +472,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 292.54109541504749,
-        "Y": 231.87953427996825
+        "X": 230.47926984555806,
+        "Y": 245.32626315335762
       },
       {
         "ShowGeometry": true,
@@ -448,8 +482,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 292.54109541504749,
-        "Y": 147.87953427996825
+        "X": 318.36388963219088,
+        "Y": 153.26345399862066
       },
       {
         "ShowGeometry": true,
@@ -458,8 +492,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 292.54109541504749,
-        "Y": 39.879534279968254
+        "X": 230.47926984555806,
+        "Y": 53.326263153357615
       },
       {
         "ShowGeometry": true,
@@ -473,33 +507,13 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "Application.OpenDocumentFile",
-        "Id": "03f921a983764d34bb016b41fe282dba",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 971.54109541504749,
-        "Y": 174.87953427996825
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Application.CloseDocument",
-        "Id": "da73b0df5f7f473692d96198ad572424",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 1370.5410954150475,
-        "Y": 241.87953427996825
-      },
-      {
-        "ShowGeometry": true,
         "Name": "Boolean",
         "Id": "af6de4edc4784ebb976b9e19e31992a7",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 565.93623147654671,
-        "Y": 315.51506615673742
+        "X": 646.61660471688276,
+        "Y": 352.752161498431
       },
       {
         "ShowGeometry": true,
@@ -508,52 +522,62 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1136.3727689732721,
-        "Y": 402.157768385366
+        "X": 1106.3762199480188,
+        "Y": 313.2466612480971
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ʳʰʸᵗʰᵐ|Applications.OpenDocumentFile",
+        "Id": "3e3cc7d46d204a50b5defd6d48ecd567",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 958.148845537017,
+        "Y": 125.48886902839575
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ʳʰʸᵗʰᵐ|Applications.CloseDocument",
+        "Id": "1a23a3d1dfb041078b2c8baa45ce87e8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1342.9321640678513,
+        "Y": 125.48886902839541
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "ecc998a88c6949f3af42ae95386c55d8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 636.3184031982446,
+        "Y": 279.65942314419721
       }
     ],
     "Annotations": [
       {
-        "Id": "49d144a980354f08a070bcdea680ee60",
+        "Id": "b81f172badc843eeafa87cfaf989ef7e",
         "Title": "Open and optionally save rfa files.\r\nUsing Rhythm package",
         "Nodes": [
-          "03f921a983764d34bb016b41fe282dba",
-          "da73b0df5f7f473692d96198ad572424",
-          "4b5f7f4f8ec8422fb0aab594c9546760"
+          "4b5f7f4f8ec8422fb0aab594c9546760",
+          "3e3cc7d46d204a50b5defd6d48ecd567",
+          "1a23a3d1dfb041078b2c8baa45ce87e8"
         ],
-        "Left": 961.54109541504749,
-        "Top": 78.879534279968254,
-        "Width": 635.0,
-        "Height": 391.27823410539776,
+        "Left": 948.148845537017,
+        "Top": 29.088869028395408,
+        "Width": 627.1833185308343,
+        "Height": 351.95779221970173,
         "FontSize": 36.0,
-        "InitialTop": 174.87953427996825,
-        "InitialHeight": 325.27823410539781,
-        "TextblockHeight": 86.0,
+        "InitialTop": 125.48886902839541,
+        "InitialHeight": 285.5577922197017,
+        "TextblockHeight": 86.4,
         "Background": "#FFBB87C6"
-      },
-      {
-        "Id": "ba8916521b0e44c6b9295782c934d233",
-        "Title": "Get a list of rfa files",
-        "Nodes": [
-          "27d3ad483d3346cebc3100f689262381",
-          "c910688201de4346b08c78558a708945",
-          "184c1ab3fffc47f5a50420f8ed0b4feb",
-          "c1ca7724a25a44d393d6f184e3afec48",
-          "ffe203737c2d4c55817f6c1cd4fd13ad"
-        ],
-        "Left": 81.5410954150475,
-        "Top": -13.120465720031746,
-        "Width": 800.0,
-        "Height": 313.0,
-        "FontSize": 36.0,
-        "InitialTop": 39.879534279968254,
-        "InitialHeight": 290.0,
-        "TextblockHeight": 43.0,
-        "Background": "#FFC1D676"
       }
     ],
-    "X": -652.65924542868538,
-    "Y": -55.095760049758439,
-    "Zoom": 1.1154442832341003
+    "X": -361.83938715067973,
+    "Y": 204.28701457874706,
+    "Zoom": 0.74174351032330788
   }
 }
