@@ -1,0 +1,224 @@
+{
+  "Uuid": "782abece-af26-43dc-a508-afcd8c075386",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "CW_Remove_all_H_grids",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "17040a2a-2f5e-40ce-b6ac-757d22ce4e98-002aed4a"
+      ],
+      "Id": "c183d10cbeb74ff49e0b51982f946659",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "26cccd176cad4880b36a3bc67d0a6bfe",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Rhythm.Revit.Elements.CurtainGrid.ByWallElement@Revit.Elements.Wall",
+      "Id": "09052e3ccf0c42a4bf95562a7babe08a",
+      "Inputs": [
+        {
+          "Id": "b3915c39c75348fe812c40e6dd283984",
+          "Name": "curtainWall",
+          "Description": "The curtain gridline to get data from.\n\nWall",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c09fdd53bece4e1da763c7ead56c09c6",
+          "Name": "curtainGrid",
+          "Description": "The internal curtain grid.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f26b877daf2940a4812daec6feaebc06",
+          "Name": "uGrids",
+          "Description": "The grids in the U direction, (horizontal).",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "51f3505ebfac4a0b8c03300aa0f1a8c8",
+          "Name": "vGrids",
+          "Description": "The grids in the V direction, (vertical).",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "This node will retrieve the curtain grid and U/V Gridlines from the given wall\n\nCurtainGrid.ByWallElement (curtainWall: Wall): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Elements.Elements.Delete@Revit.Elements.Element",
+      "Id": "d662f86cf3d04152b97cf9e21b6afbeb",
+      "Inputs": [
+        {
+          "Id": "467931c1593e428d8f02d9d6d5ace658",
+          "Name": "element",
+          "Description": "Element to delete.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a5c3dc068fa3431fafd00de8bf77e91f",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Delete element from Revit DB.\n\nElements.Delete (element: Element): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Elements.Elements.Delete@Revit.Elements.Element",
+      "Id": "f8f749134f79436c8c48ae485faf636d",
+      "Inputs": [
+        {
+          "Id": "9c489b304b1b429a9f83f70d4ec16092",
+          "Name": "element",
+          "Description": "Element to delete.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f06c6db69d84481db241b3ed2d833ed5",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Delete element from Revit DB.\n\nElements.Delete (element: Element): bool"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "26cccd176cad4880b36a3bc67d0a6bfe",
+      "End": "b3915c39c75348fe812c40e6dd283984",
+      "Id": "932a2313224749f68496236732729ebf"
+    },
+    {
+      "Start": "f26b877daf2940a4812daec6feaebc06",
+      "End": "467931c1593e428d8f02d9d6d5ace658",
+      "Id": "d27b8849c03c42c38cda6c8434e3af46"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.3.8810",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -1716.2219441556131,
+      "EyeY": 341.75450140157437,
+      "EyeZ": 4851.8472006651973,
+      "LookX": 217.57375079623807,
+      "LookY": -341.75450140157437,
+      "LookZ": -818.31326511832231,
+      "UpX": 0.0428518105774576,
+      "UpY": 0.98599603707050421,
+      "UpZ": -0.16116928122782276
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Element",
+        "Id": "c183d10cbeb74ff49e0b51982f946659",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1478.2907540908809,
+        "Y": -19.951927936231016
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ʳʰʸᵗʰᵐ|CurtainGrid.ByWallElement",
+        "Id": "09052e3ccf0c42a4bf95562a7babe08a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1683.9630365457606,
+        "Y": -19.031847072703471
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Elements.Delete",
+        "Id": "d662f86cf3d04152b97cf9e21b6afbeb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1992.0424609512634,
+        "Y": -13.884309275170622
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Elements.Delete",
+        "Id": "f8f749134f79436c8c48ae485faf636d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1993.3390236275586,
+        "Y": 80.867827508935363
+      }
+    ],
+    "Annotations": [],
+    "X": -1432.4057161913522,
+    "Y": 183.06081377897885,
+    "Zoom": 0.98364874691922577
+  }
+}
