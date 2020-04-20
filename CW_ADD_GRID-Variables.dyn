@@ -47,7 +47,7 @@
       "Id": "8ffdc16a36a24c4ebae1243f8ade5b1e",
       "Name": "Min Grid size",
       "Type": "number",
-      "Value": "100",
+      "Value": "120",
       "MaximumValue": 270.0,
       "MinimumValue": 60.0,
       "StepValue": 2.5,
@@ -58,7 +58,7 @@
       "Id": "c0f5db827c0e492ead0c791db384976d",
       "Name": "Max Grid size",
       "Type": "number",
-      "Value": "160",
+      "Value": "145",
       "MaximumValue": 270.0,
       "MinimumValue": 60.0,
       "StepValue": 2.5,
@@ -1164,7 +1164,7 @@
       "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
       "InstanceId": [
-        "17040a2a-2f5e-40ce-b6ac-757d22ce4e98-002aed4a"
+        "17040a2a-2f5e-40ce-b6ac-757d22ce4e98-002aa3a0"
       ],
       "Id": "6bc1298dd666499ea3c45e4ecb3b8783",
       "Inputs": [],
@@ -1218,7 +1218,7 @@
       "MaximumValue": 270.0,
       "MinimumValue": 60.0,
       "StepValue": 2.5,
-      "InputValue": 100.0,
+      "InputValue": 120.0,
       "Id": "8ffdc16a36a24c4ebae1243f8ade5b1e",
       "Inputs": [],
       "Outputs": [
@@ -1517,7 +1517,7 @@
       "MaximumValue": 270.0,
       "MinimumValue": 60.0,
       "StepValue": 2.5,
-      "InputValue": 160.0,
+      "InputValue": 145.0,
       "Id": "c0f5db827c0e492ead0c791db384976d",
       "Inputs": [],
       "Outputs": [
@@ -2303,8 +2303,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 4484.1114660447747,
-        "Y": 1840.4925184832093
+        "X": 4478.1585149316952,
+        "Y": 1852.3984207093679
       },
       {
         "ShowGeometry": true,
@@ -2323,8 +2323,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": true,
-        "X": 4819.21760653896,
-        "Y": 1681.62102648491
+        "X": 4857.6796355337556,
+        "Y": 1592.9446818580202
       },
       {
         "ShowGeometry": true,
@@ -2417,17 +2417,17 @@
         ],
         "Left": 2405.8756119918339,
         "Top": -779.09833349784412,
-        "Width": 670.010476944473,
+        "Width": 602.810476944473,
         "Height": 261.26003329690241,
         "FontSize": 36.0,
         "InitialTop": -725.89833349784408,
-        "InitialHeight": 260.46003329690228,
+        "InitialHeight": 260.46003329690234,
         "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       }
     ],
-    "X": -2926.2025672573914,
-    "Y": -1348.6772253483198,
-    "Zoom": 0.85360641027444517
+    "X": -2696.4221213166566,
+    "Y": -1189.250050517054,
+    "Zoom": 0.74879045002792233
   }
 }
