@@ -36,7 +36,7 @@
       "Id": "5ecdc0f3d5c84ff3a4cfad1229e699cd",
       "Name": "Grid size",
       "Type": "number",
-      "Value": "68",
+      "Value": "135",
       "MaximumValue": 270.0,
       "MinimumValue": 60.0,
       "StepValue": 2.5,
@@ -50,7 +50,7 @@
       "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
       "NodeType": "ExtensionNode",
       "InstanceId": [
-        "17040a2a-2f5e-40ce-b6ac-757d22ce4e98-002aa3a0"
+        "17040a2a-2f5e-40ce-b6ac-757d22ce4e98-002a7311"
       ],
       "Id": "c183d10cbeb74ff49e0b51982f946659",
       "Inputs": [],
@@ -104,7 +104,7 @@
       "MaximumValue": 270.0,
       "MinimumValue": 60.0,
       "StepValue": 2.5,
-      "InputValue": 68.0,
+      "InputValue": 135.0,
       "Id": "5ecdc0f3d5c84ff3a4cfad1229e699cd",
       "Inputs": [],
       "Outputs": [
@@ -240,7 +240,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nimport math\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\n\r\nfix_distance = IN[0]\r\ncurveObject = IN[1]\r\n\r\ncurveLength = curveObject.Length\r\n\r\n# Place your code below this line\r\npattern = []\r\nptlist =[]\r\ndlist = [] \r\n\r\nwbase = IN[2]\r\nacm_distance = 0.0\r\nnum_panels = int(math.floor(curveLength / fix_distance))\r\n\r\nv_distance = curveLength - (num_panels * fix_distance)\r\n\r\n\r\nif num_panels % 2 == 0:\r\n\tfor x in range(num_panels / 2 ):\r\n\t\tpattern.append(\"f\")\r\n\t\ttpt = curveObject.PointAtSegmentLength(acm_distance + fix_distance)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\t#ptlist.append(curveObject.PointAtSegmentLength(acm_distance + fix_distance))\r\n\t\tptlist.append(tptz)\r\n\t\tdlist.append(acm_distance)\r\n\t\tacm_distance += fix_distance\r\n\tpattern.append(\"v\")\r\n\ttpt = curveObject.PointAtSegmentLength(acm_distance+v_distance)\r\n\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\tptlist.append(tptz)\r\n\t\r\n\t#ptlist.append(curveObject.PointAtSegmentLength(acm_distance+v_distance))\r\n\tdlist.append(acm_distance)\r\n\tacm_distance += v_distance\r\n\tfor x in range(num_panels / 2 ):\r\n\t\t#ptlist.append(curveObject.PointAtSegmentLength(acm_distance + fix_distance))\r\n\t\ttpt = curveObject.PointAtSegmentLength(acm_distance + fix_distance)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\tptlist.append(tptz)\r\n\t\tdlist.append(acm_distance)\r\n\t\tacm_distance += fix_distance\r\nelse:\r\n\tpattern.append(\"v\")\r\n\ttpt = curveObject.PointAtSegmentLength(v_distance / 2.0)\r\n\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\tptlist.append(tptz)\r\n\t#ptlist.append(curveObject.PointAtSegmentLength(v_distance / 2.0))\r\n\tdlist.append(acm_distance)\r\n\tacm_distance += v_distance / 2.0\r\n\tfor x in range(num_panels  ):\r\n\t\tpattern.append(\"f\")\r\n\t\ttpt = curveObject.PointAtSegmentLength (acm_distance + fix_distance)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\t#ptlist.append(curveObject.PointAtSegmentLength (acm_distance + fix_distance))\r\n\t\tptlist.append(tptz)\r\n\t\tdlist.append(acm_distance)\r\n\t\tacm_distance += fix_distance\r\n\tpattern.append(\"v\")\r\n\t\r\n\t#ptlist.append(curveObject.PointAtSegmentLength(v_distance / 2.0))\r\n\ttpt = curveObject.PointAtSegmentLength(v_distance / 2.0)\r\n\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\tptlist.append(tptz)\r\n\tdlist.append(acm_distance)\r\n\tacm_distance += v_distance / 2.0\r\n#curveObject = IN[3]\t\r\n\r\n#Autodesk.DesignScript.Geometry.Curve.  \r\n# Assign your output to the OUT variable.\r\noutput = ptlist\r\n\r\nOUT = output",
+      "Code": "# Enable Python support and load DesignScript library\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\nimport math\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\n\r\nfix_distance = IN[0]\r\ncurveObject = IN[1]\r\n\r\ncurveLength = curveObject.Length\r\n\r\n# Place your code below this line\r\npattern = []\r\nptlist =[]\r\ndlist = [] \r\n\r\nwbase = IN[2]\r\nsimple_division = IN[3]\r\n\r\nacm_distance = 0.0\r\n\r\n\r\nnum_panels_flt = curveLength / fix_distance\r\nnum_panels = int(math.floor(curveLength / fix_distance))\r\nv_distance = curveLength - (num_panels * fix_distance)\r\n\r\n\r\n\r\nif simple_division:\r\n\tfor x in range(int(num_panels_flt)):\r\n\t\ttpt = curveObject.PointAtSegmentLength((x+1)*fix_distance)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\tptlist.append(tptz)\r\nelse :\r\n\tif num_panels % 2 == 0:\r\n\t\tfor x in range(num_panels / 2 ):\r\n\t\t\tpattern.append(\"f\")\r\n\t\t\ttpt = curveObject.PointAtSegmentLength(acm_distance + fix_distance)\r\n\t\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\t\t#ptlist.append(curveObject.PointAtSegmentLength(acm_distance + fix_distance))\r\n\t\t\tptlist.append(tptz)\r\n\t\t\tdlist.append(acm_distance)\r\n\t\t\tacm_distance += fix_distance\r\n\t\tpattern.append(\"v\")\r\n\t\ttpt = curveObject.PointAtSegmentLength(acm_distance+v_distance)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\tptlist.append(tptz)\r\n\t\t\r\n\t\t#ptlist.append(curveObject.PointAtSegmentLength(acm_distance+v_distance))\r\n\t\tdlist.append(acm_distance)\r\n\t\tacm_distance += v_distance\r\n\t\tfor x in range(num_panels / 2 ):\r\n\t\t\t#ptlist.append(curveObject.PointAtSegmentLength(acm_distance + fix_distance))\r\n\t\t\ttpt = curveObject.PointAtSegmentLength(acm_distance + fix_distance)\r\n\t\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\t\tptlist.append(tptz)\r\n\t\t\tdlist.append(acm_distance)\r\n\t\t\tacm_distance += fix_distance\r\n\telse:\r\n\t\tpattern.append(\"v\")\r\n\t\ttpt = curveObject.PointAtSegmentLength(v_distance / 2.0)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\tptlist.append(tptz)\r\n\t\t#ptlist.append(curveObject.PointAtSegmentLength(v_distance / 2.0))\r\n\t\tdlist.append(acm_distance)\r\n\t\tacm_distance += v_distance / 2.0\r\n\t\tfor x in range(num_panels  ):\r\n\t\t\tpattern.append(\"f\")\r\n\t\t\ttpt = curveObject.PointAtSegmentLength (acm_distance + fix_distance)\r\n\t\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\t\t#ptlist.append(curveObject.PointAtSegmentLength (acm_distance + fix_distance))\r\n\t\t\tptlist.append(tptz)\r\n\t\t\tdlist.append(acm_distance)\r\n\t\t\tacm_distance += fix_distance\r\n\t\tpattern.append(\"v\")\r\n\t\t\r\n\t\t#ptlist.append(curveObject.PointAtSegmentLength(v_distance / 2.0))\r\n\t\ttpt = curveObject.PointAtSegmentLength(v_distance / 2.0)\r\n\t\ttptz = Point.ByCoordinates(tpt.X,tpt.Y,tpt.Z+wbase)\r\n\t\tptlist.append(tptz)\r\n\t\tdlist.append(acm_distance)\r\n\t\tacm_distance += v_distance / 2.0\r\n#curveObject = IN[3]\t\r\nif (not simple_division):\r\n\tptlist = ptlist[:-1]\r\n#Autodesk.DesignScript.Geometry.Curve.  \r\n# Assign your output to the OUT variable.\r\noutput = ptlist\r\n\r\nOUT = output",
       "VariableInputPorts": true,
       "Id": "69ae8f177079469a88bf5bb31d6d8e41",
       "Inputs": [
@@ -266,6 +266,15 @@
           "Id": "ff248059ddbe454cb93962cc225d5e4d",
           "Name": "IN[2]",
           "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bcd060e141444967a19d03e7c7376e82",
+          "Name": "IN[3]",
+          "Description": "Input #3",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -571,96 +580,6 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string."
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "DSCore.List.Reverse@var[]..[]",
-      "Id": "d6e4547990384d02b4130ffd299f7c2d",
-      "Inputs": [
-        {
-          "Id": "b65abe4cf04b4b9eaf9eeabccc1a04a1",
-          "Name": "list",
-          "Description": "List to be reversed.\n\nvar[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "80bf1571329346bcaa830909b261fad1",
-          "Name": "list",
-          "Description": "New list.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Creates a new list containing the items of the given list but in reverse order.\n\nList.Reverse (list: var[]..[]): var[]..[]"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "DSCore.List.RestOfItems@var[]..[]",
-      "Id": "5ea9785516334063994a1dc4cc92cb5f",
-      "Inputs": [
-        {
-          "Id": "3ec9af52dd494bde89090955d05b645d",
-          "Name": "list",
-          "Description": "List to get the rest of.\n\nvar[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "6743756987504135a35ac52b7ccc98e8",
-          "Name": "rest",
-          "Description": "Rest of the list.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Removes the first item from the given list.\n\nList.RestOfItems (list: var[]..[]): var[]..[]"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "DSCore.List.Reverse@var[]..[]",
-      "Id": "5a9479cf24454d0cbb69507fa51e1e49",
-      "Inputs": [
-        {
-          "Id": "7c771fb65caa47a28fb08267330be6f7",
-          "Name": "list",
-          "Description": "List to be reversed.\n\nvar[]..[]",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "66ffb77891d745bc8b287fef6b04631a",
-          "Name": "list",
-          "Description": "New list.",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Creates a new list containing the items of the given list but in reverse order.\n\nList.Reverse (list: var[]..[]): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
@@ -1137,6 +1056,55 @@
       ],
       "Replication": "Auto",
       "Description": "The total arc length of the curve\n\nCurve.Length: double"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "43ced00362664519b246a8d7381b35d8",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "031b566bb6a4440db4109f14f7f30afe",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "0e8fa01ca56f4e7a812cd837fd92a5f1",
+      "Inputs": [
+        {
+          "Id": "657c1369d81c42c5a0cd951858e703fa",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1d02254d265144288b5347b9b37d6a2b",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
     }
   ],
   "Connectors": [
@@ -1177,8 +1145,13 @@
     },
     {
       "Start": "112e45156621475cace09535e14193ba",
-      "End": "b65abe4cf04b4b9eaf9eeabccc1a04a1",
-      "Id": "0969b1fa7c1d4f1a94c09f14ca58a1a4"
+      "End": "657c1369d81c42c5a0cd951858e703fa",
+      "Id": "d05d7e91dc5f40e89b51d83b4e12a816"
+    },
+    {
+      "Start": "112e45156621475cace09535e14193ba",
+      "End": "450dc50933bd44c4a70f29c87145e2db",
+      "Id": "c645e7aac6574c159e6249b9aa9953e7"
     },
     {
       "Start": "3b2340b3c62e42b3a212230541597166",
@@ -1224,21 +1197,6 @@
       "Start": "d69341514949428dafd8409b1a5b0a5b",
       "End": "f8229c74f29a483f8a3f046a3f269254",
       "Id": "91b5a5e152ee4ed79fa5c9721fb92ce7"
-    },
-    {
-      "Start": "80bf1571329346bcaa830909b261fad1",
-      "End": "3ec9af52dd494bde89090955d05b645d",
-      "Id": "0029a86432ac4fd1b5005eed0a4af188"
-    },
-    {
-      "Start": "6743756987504135a35ac52b7ccc98e8",
-      "End": "7c771fb65caa47a28fb08267330be6f7",
-      "Id": "bc7a99149e5c43aa96ed0f1ccbd759b5"
-    },
-    {
-      "Start": "66ffb77891d745bc8b287fef6b04631a",
-      "End": "450dc50933bd44c4a70f29c87145e2db",
-      "Id": "ad85f0959a9549a495d6c1368ece7fa8"
     },
     {
       "Start": "8f18643adfde4838b60e67886c0cb524",
@@ -1298,7 +1256,7 @@
     {
       "Start": "c3bb7a4e4e7646b69395743a49652706",
       "End": "11e7ea577b924900b707957ed0564e8e",
-      "Id": "900b9b45131c4ef0bd6f36a1149cc282"
+      "Id": "c529c96ca3d04ebca10010593bbe9abe"
     },
     {
       "Start": "0af78c098ada42fcaeb021b43f4e9328",
@@ -1309,6 +1267,11 @@
       "Start": "d0aa930364684f88ac149987add0f183",
       "End": "c2ff383f3ce442fd8bffa1ce0dcf28b1",
       "Id": "e904447981b04f3b8b8b59ba669f738d"
+    },
+    {
+      "Start": "031b566bb6a4440db4109f14f7f30afe",
+      "End": "bcd060e141444967a19d03e7c7376e82",
+      "Id": "cb992ff3985a4549a62ed0fdd4a272a8"
     }
   ],
   "Dependencies": [
@@ -1355,8 +1318,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1846.4691348016681,
-        "Y": 171.65540284947809
+        "X": 1874.932106399749,
+        "Y": 52.871067455196908
       },
       {
         "ShowGeometry": true,
@@ -1365,8 +1328,8 @@
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1846.4691348016681,
-        "Y": 80.390451025832249
+        "X": 1805.6268599609432,
+        "Y": -16.561575415031768
       },
       {
         "ShowGeometry": true,
@@ -1375,8 +1338,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 3255.1940665538127,
-        "Y": -78.481040972470623
+        "X": 3243.6707437442883,
+        "Y": -175.47759204796716
       },
       {
         "ShowGeometry": true,
@@ -1385,8 +1348,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2955.9795760620877,
-        "Y": 195.51056164313576
+        "X": 2961.7070490504752,
+        "Y": -54.726093056567152
       },
       {
         "ShowGeometry": true,
@@ -1405,8 +1368,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2320.4969881122543,
-        "Y": 80.390451025832249
+        "X": 2306.7380494271988,
+        "Y": -88.454931976009959
       },
       {
         "ShowGeometry": true,
@@ -1485,8 +1448,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1846.4691348016681,
-        "Y": 276.10281916938982
+        "X": 1840.1665601439161,
+        "Y": 147.43683346338196
       },
       {
         "ShowGeometry": true,
@@ -1495,38 +1458,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1701.5322364772587,
-        "Y": 327.10281916938982
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "List.Reverse",
-        "Id": "d6e4547990384d02b4130ffd299f7c2d",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 2500.8162423815043,
-        "Y": 80.390451025832249
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "List.RestOfItems",
-        "Id": "5ea9785516334063994a1dc4cc92cb5f",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 2709.0778484393495,
-        "Y": 80.390451025832249
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "List.Reverse",
-        "Id": "5a9479cf24454d0cbb69507fa51e1e49",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 2920.0879260596271,
-        "Y": 80.390451025832249
+        "X": 1686.2244241248204,
+        "Y": 216.54639662400353
       },
       {
         "ShowGeometry": true,
@@ -1575,8 +1508,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1642.4657675494886,
-        "Y": -753.10834054445854
+        "X": 1603.776777133867,
+        "Y": -795.74518712493966
       },
       {
         "ShowGeometry": true,
@@ -1585,8 +1518,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1521.2197289317824,
-        "Y": -745.97622062576977
+        "X": 1482.5307385161607,
+        "Y": -788.61306720625089
       },
       {
         "ShowGeometry": true,
@@ -1595,8 +1528,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1523.7475355521092,
-        "Y": -688.27787248413006
+        "X": 1485.0585451364875,
+        "Y": -730.91471906461118
       },
       {
         "ShowGeometry": true,
@@ -1605,8 +1538,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1947.1091755049019,
-        "Y": -735.78747788478609
+        "X": 1908.4201850892803,
+        "Y": -778.4243244652672
       },
       {
         "ShowGeometry": true,
@@ -1615,8 +1548,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2541.3434470093066,
-        "Y": -491.96854596028703
+        "X": 2499.5945104705215,
+        "Y": -499.07474792433555
       },
       {
         "ShowGeometry": true,
@@ -1625,8 +1558,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2298.5214731049869,
-        "Y": -551.24181980689946
+        "X": 2256.7725365662018,
+        "Y": -558.348021770948
       },
       {
         "ShowGeometry": true,
@@ -1635,8 +1568,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2790.1970994285689,
-        "Y": -471.23198398207546
+        "X": 2748.4481628897838,
+        "Y": -478.338185946124
       },
       {
         "ShowGeometry": true,
@@ -1645,8 +1578,28 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2285.7866224840959,
-        "Y": -435.78178650999718
+        "X": 2244.0376859453108,
+        "Y": -442.8879884740457
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Simple Division",
+        "Id": "43ced00362664519b246a8d7381b35d8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2129.5744672842734,
+        "Y": 206.94068326089786
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "0e8fa01ca56f4e7a812cd837fd92a5f1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2609.9122598751956,
+        "Y": -34.468215912730727
       }
     ],
     "Annotations": [
@@ -1673,33 +1626,6 @@
         "Background": "#FFFFB8D8"
       },
       {
-        "Id": "4924f6fe31714452b3718e782efa9776",
-        "Title": "divide vertical grid",
-        "Nodes": [
-          "c183d10cbeb74ff49e0b51982f946659",
-          "f4cc0327bb784409a1c0d497902a88d2",
-          "5ecdc0f3d5c84ff3a4cfad1229e699cd",
-          "e195e98c6108454d88c64f78972c8008",
-          "b66288b85d9f473aa317ea99d3e2590d",
-          "09052e3ccf0c42a4bf95562a7babe08a",
-          "69ae8f177079469a88bf5bb31d6d8e41",
-          "33eb5294cc20458393e99f9a96f59e55",
-          "9f25a0271bbd4dd8a090062839c9fca7",
-          "d6e4547990384d02b4130ffd299f7c2d",
-          "5ea9785516334063994a1dc4cc92cb5f",
-          "5a9479cf24454d0cbb69507fa51e1e49"
-        ],
-        "Left": 1423.3864693447558,
-        "Top": -217.42187961407103,
-        "Width": 2133.8075972090569,
-        "Height": 612.3246987834608,
-        "FontSize": 36.0,
-        "InitialTop": -164.22187961407104,
-        "InitialHeight": 636.32469878346092,
-        "TextblockHeight": 43.2,
-        "Background": "#FFC1D676"
-      },
-      {
         "Id": "287ca8a6dc004f3585d21c96d1e69d49",
         "Title": "מספר קבוע",
         "Nodes": [
@@ -1708,12 +1634,12 @@
           "591ea649b6d442658533f0e380850b3d",
           "690712f8beb045a1aa0d1de1c033de00"
         ],
-        "Left": 1511.2197289317824,
-        "Top": -806.30834054445859,
+        "Left": 1472.5307385161607,
+        "Top": -848.94518712493971,
         "Width": 591.48944657311961,
         "Height": 185.83046806032854,
         "FontSize": 36.0,
-        "InitialTop": -753.10834054445854,
+        "InitialTop": -795.74518712493966,
         "InitialHeight": 209.83046806032849,
         "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
@@ -1727,19 +1653,19 @@
           "e8c12b5d6dd14e229aee366f43e2f9b7",
           "b035d2b9e26a403e83798776bd0eaddc"
         ],
-        "Left": 2275.7866224840959,
-        "Top": -604.4418198068995,
+        "Left": 2234.0376859453108,
+        "Top": -611.548021770948,
         "Width": 670.010476944473,
         "Height": 261.26003329690229,
         "FontSize": 36.0,
-        "InitialTop": -551.24181980689946,
+        "InitialTop": -558.348021770948,
         "InitialHeight": 260.46003329690228,
         "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       }
     ],
-    "X": -1027.3865857670366,
-    "Y": 422.36538450459085,
-    "Zoom": 0.74365760234267642
+    "X": -929.88327844599019,
+    "Y": 262.76094901133712,
+    "Zoom": 0.78861644229156991
   }
 }
